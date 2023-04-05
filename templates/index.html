@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор типа посещения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 50px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background-image: url('/static/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 10px;
+
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #0099cc;
+            margin-right: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn:last-child {
+            margin-right: 0;
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .icon-personal {
+            background-image: url('/static/personal.png');
+        }
+        
+        .icon-group {
+            background-image: url('/static/group.png');
+        }
+        
+        @media (max-width: 600px) {
+            .btn {
+                display: block;
+                margin: 0 auto 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <h1>ХранительПРО</h1>
+    </div>
+    <div class="container">
+        <h2>Выберите тип посещения</h2>
+        <a href="/personal" class="btn"><span class="icon icon-personal"></span>Личное посещение</a>
+        <a href="/group" class="btn"><span class="icon icon-group"></span>Групповое посещение</a>
+    </div>
+</body>
+</html>

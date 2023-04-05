@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Персональное посещение</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style_personal.css') }}">
+</head>
+<body>
+	<form action="/submit-request" method="POST">
+		 <div class="header">
+	        <div class="logo"></div>
+	        <h1>ХранительПРО</h1>
+	    </div>
+		<div class="container">
+			<h1>Информация для пропуска</h1>
+			<div class="form-row">
+				<label for="date-from">Дата посещения</label>
+				<input type="date" id="date-from">
+			</div>
+			<div class="form-row">
+				<label for="visit-purpose">Цель посещения</label>
+				<input type="text" id="info">
+			</div>
+			<h1>Принимающая сторона</h1>
+			<div class="form-row">
+				<label for="subdivision">Подразделение</label>
+				<input type="text" id="department">
+			</div>
+			<div class="form-row">
+				<label for="full-name">ФИО</label>
+				<input type="text" id="full-name">
+			</div>
+			<h1>Информация о посетителе</h1>
+			<div class="form-row">
+				<label for="surname">ФИО</label>
+				<input type="text" id="fio">
+			</div>
+			<div class="form-row">
+				<label for="phone">Телефон</label>
+				<input type="tel" id="phone">
+				<label for="email">Эл. почта</label>
+				<input type="email" id="email">
+			</div>
+			<div class="form-row">
+			    <div class="form-group col-md-6">
+			        <label for="passport">Серия и номер паспорта</label>
+			        <input type="text" id="passport" class="form-control" name="passport">
+			    </div>
+			</div>
+			<!-- <div class="form-row">
+			    <div class="form-group col-md-12">
+			        <label for="documents">Прикрепляемые документы</label>
+			        <input type="file" id="documents" class="form-control-file" name="documents">
+			    </div>
+			</div> -->
+			<div class="form-group">
+			    <button type="submit" class="btn btn-primary">Отправить</button>
+			</div>
+		</form>	
+	</div>
+</body>
+</html>
+
