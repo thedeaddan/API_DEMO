@@ -6,58 +6,71 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='style_personal.css') }}">
 </head>
 <body>
-	<form action="/submit-request" method="POST">
-		 <div class="header">
-	        <div class="logo"></div>
-	        <h1>ХранительПРО</h1>
-	    </div>
-		<div class="container">
+	<div class="header">
+        <div class="logo"></div>
+        <h1>ХранительПРО</h1>
+    </div>
+	<div class="container">
+		<form id="myForm">
 			<h1>Информация для пропуска</h1>
 			<div class="form-row">
 				<label for="date-from">Дата посещения</label>
-				<input type="date" id="date-from">
+				<input type="date" id="date-from" name="dateFrom">
 			</div>
 			<div class="form-row">
 				<label for="visit-purpose">Цель посещения</label>
-				<input type="text" id="info">
+				<input type="text" id="info" name="visitPurpose">
 			</div>
 			<h1>Принимающая сторона</h1>
 			<div class="form-row">
 				<label for="subdivision">Подразделение</label>
-				<input type="text" id="department">
+				<input type="text" id="department" name="subdivision">
 			</div>
 			<div class="form-row">
 				<label for="full-name">ФИО</label>
-				<input type="text" id="full-name">
+				<input type="text" id="full-name" name="fullName">
 			</div>
 			<h1>Информация о посетителе</h1>
 			<div class="form-row">
 				<label for="surname">ФИО</label>
-				<input type="text" id="fio">
+				<input type="text" id="fio" name="visitorFullName">
 			</div>
 			<div class="form-row">
 				<label for="phone">Телефон</label>
-				<input type="tel" id="phone">
+				<input type="tel" id="phone" name="visitorPhone">
 				<label for="email">Эл. почта</label>
-				<input type="email" id="email">
+				<input type="email" id="email" name="visitorEmail">
 			</div>
 			<div class="form-row">
 			    <div class="form-group col-md-6">
 			        <label for="passport">Серия и номер паспорта</label>
-			        <input type="text" id="passport" class="form-control" name="passport">
+			        <input type="text" id="passport" class="form-control" name="visitorPassport">
 			    </div>
 			</div>
-			<!-- <div class="form-row">
-			    <div class="form-group col-md-12">
-			        <label for="documents">Прикрепляемые документы</label>
-			        <input type="file" id="documents" class="form-control-file" name="documents">
-			    </div>
-			</div> -->
 			<div class="form-group">
 			    <button type="submit" class="btn btn-primary">Отправить</button>
 			</div>
 		</form>	
 	</div>
+
+	<script>
+		const form = document.getElementById("myForm");
+
+		form.addEventListener("submit", function (event) {
+			event.preventDefault();
+
+			const data = new FormData(form);
+			const jsonObject = {};
+
+			for (const [key, value] of data.entries()) {
+				jsonObject[key] = value;
+			}
+
+			const xhr = new XMLHttpRequest();
+			xhr.open("POST", "/submit-request");
+			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhr.send(JSON.stringify(jsonObject));
+		});
+	</script>
 </body>
 </html>
-

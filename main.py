@@ -73,38 +73,39 @@ def login():
 
 @app.route('/submit-request', methods=['POST'])
 def submit_request():
-    data = request.json
-    token = request.headers.get('Authorization')
-    fio = data['fio']
-    date = data['date-from']
-    info = data['info']
-    department = data['department']
-    department_fio = data["dep_fio"]
-    phone = data['phone']
-    email = data['email']
-    passport = data['passport']
+    try:
+        data = request.json
+        fio = data['visitorFullName']
+        date_ = data['dateFrom']
+        info = data['visitPurpose']
+        department = data['subdivision']
+        department_fio = data["fullName"]
+        phone = data['visitorPhone']
+        email = data['visitorEmail']
+        passport = data['visitorPassport']
 
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()
+        c.execute('INSERT INTO requests (fio,date_,info,department,department_fio,phone,email,passport) VALUES (?,?,?,?,?,?,?,?)', (fio,date_,info,department,department_fio,phone,email,passport))
 
-    c.execute('SELECT * FROM users WHERE token = ?', (token,))
-    user = c.fetchone()
-
-    if user is None:
+        conn.commit()
         conn.close()
-        return jsonify({'error': 'Unauthorized'}), 401
+        return "ok"
+       # return jsonify({'message': 'Request submitted successfully'}), 201
+    except Exception as e:
+        print(str(e))
+        return str(e)
+        print(e)
 
-    c.execute('INSERT INTO requests (user_id, fio, date, department, phone, email, passport) VALUES (?, ?, ?, ?, ?, ?, ?)', (user[0], fio, date, department, phone, email, passport))
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Request submitted successfully'}), 201
 
 # Обработка страницы 404
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
+
+@app.errorhandler(401)
+def page_not_found(error):
+    return render_template('401.html'), 401
 
 
 if __name__ == '__main__':
